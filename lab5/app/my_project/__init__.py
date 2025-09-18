@@ -3,6 +3,7 @@ import yaml
 import os
 from my_project.database import db
 from my_project.sportsman.routes.__init__ import register_routes
+from flasgger import Swagger
 
 def create_app():
     app = Flask(__name__)
@@ -15,7 +16,8 @@ def create_app():
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
     db.init_app(app)
-
     register_routes(app)
+
+    Swagger(app)
 
     return app
