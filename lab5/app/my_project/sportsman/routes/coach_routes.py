@@ -2,6 +2,7 @@ from flask import Blueprint, jsonify, request
 from sqlalchemy import text
 from ..controller.orders.coach_controller import CoachController
 from my_project.database import db
+from flasgger import swag_from
 
 coach_bp = Blueprint("coach", __name__)
 coach_controller = CoachController()
@@ -15,6 +16,14 @@ def get_coach_by_id(coach_id):
     return coach_controller.get_by_id(coach_id)
 
 @coach_bp.route("/coach", methods=['POST'])
+@swag_from({
+    'tags': ['Add coach'],
+    'responses': {
+        200: {
+            'description': 'Adds a coach'
+        }
+    }
+})
 def add_coach():
     return coach_controller.create()
 
