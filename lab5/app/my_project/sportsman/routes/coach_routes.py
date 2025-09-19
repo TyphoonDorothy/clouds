@@ -19,31 +19,22 @@ def get_coach_by_id(coach_id):
 @swag_from({
     'tags': ['Add coach'],
     'parameters': [
-        {'name': 'id',
-         'in': 'path',
-         'type': 'integer',
-         'required': True,
-         'description': 'ID'},
-        {'name': 'name',
-         'in': 'path',
-         'type': 'string',
-         'required': True,
-         'description': 'First Name'},
-        {'name': 'Surname',
-         'in': 'path',
-         'type': 'string',
-         'required': True,
-         'description': 'Last Name'},
-        {'name': 'specialization_id',
-         'in': 'path',
-         'type': 'integer',
-         'required': True,
-         'description': 'specialization_id'},
-        {'name': 'contact_id',
-         'in': 'path',
-         'type': 'integer',
-         'required': True,
-         'description': 'contact_id'}
+        {
+            'in': 'body',
+            'name': 'body',
+            'required': True,
+            'schema': {
+                'type': 'object',
+                'properties': {
+                    'id': {'type': 'integer'},
+                    'name': {'type': 'string'},
+                    'surname': {'type': 'string'},
+                    'specialization_id': {'type': 'integer'},
+                    'contact_id': {'type': 'integer'}
+                },
+                'required': ['id', 'name', 'surname']
+            }
+        }
     ],
     'responses': {
         200: {
@@ -51,6 +42,11 @@ def get_coach_by_id(coach_id):
         }
     }
 })
+def add_coach():
+    data = request.get_json()
+    # use data["id"], data["name"], etc.
+    return {"message": "Coach added"}, 200
+
 def add_coach():
     return coach_controller.create()
 
