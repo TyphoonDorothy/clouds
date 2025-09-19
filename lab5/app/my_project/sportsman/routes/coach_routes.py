@@ -18,9 +18,36 @@ def get_coach_by_id(coach_id):
 @coach_bp.route("/coach", methods=['POST'])
 @swag_from({
     'tags': ['Add coach'],
+    'parameters': [
+        {'name': 'id',
+         'in': 'path',
+         'type': 'integer',
+         'required': True,
+         'description': 'ID'},
+        {'name': 'name',
+         'in': 'path',
+         'type': 'string',
+         'required': True,
+         'description': 'First Name'},
+        {'name': 'Surname',
+         'in': 'path',
+         'type': 'string',
+         'required': True,
+         'description': 'Last Name'},
+        {'name': 'specialization_id',
+         'in': 'path',
+         'type': 'integer',
+         'required': True,
+         'description': 'specialization_id'},
+        {'name': 'contact_id',
+         'in': 'path',
+         'type': 'integer',
+         'required': True,
+         'description': 'contact_id'}
+    ],
     'responses': {
         200: {
-            'description': 'Adds a coach'
+            'description': 'Added a coach'
         }
     }
 })
