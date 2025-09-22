@@ -3,6 +3,7 @@ from sqlalchemy import text
 from ..controller.orders.coach_controller import CoachController
 from my_project.database import db
 from flasgger import swag_from
+from ..domain.coach import Coach
 
 coach_bp = Blueprint("coach", __name__)
 coach_controller = CoachController()
