@@ -107,7 +107,33 @@ def update_coach(coach_id):
       200:
         description: Coach updated
     """
-    return coach_controller.update(coach_id)
+    coach = Coach.query.get(coach_id)
+    if not coach:
+        return jsonify({"error": "Coach not found"}), 404
+
+    data = request.get_json()
+    if not data:
+        return jsonify({"error": "No input data provided"}), 400
+
+    # Update only provided fields (PATCH = partial update)
+    if "name" in data:
+        coach.name = data["name"]
+    if "surname" in data:
+        coach.surname = data["surname"]
+    if "coach_specialization_id" in data:
+        coach.coach_specialization_id = data["coach_specialization_id"]
+    if "contact_id" in data:
+        coach.contact_id = data["contact_id"]
+
+    db.session.commit()
+
+    return jsonify({"message": "Coach updated", "coach": {
+        "id": coach.id,
+        "name": coach.name,
+        "surname": coach.surname,
+        "coach_specialization_id": coach.coach_specialization_id,
+        "contact_id": coach.contact_id
+    }})
 
 
 @coach_bp.route("/coach/<int:coach_id>", methods=['DELETE'])
