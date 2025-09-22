@@ -17,5 +17,5 @@ class CoachSpecializationService(GeneralService):
         return False
     
     def get_coaches_by_specialization(self, specialization_id):
-        coaches = db.session.query(Coach).filter(Coach.coach_specialization_id == specialization_id).all()
-        return [coach.to_dict() for coach in coaches]
+        return Coach.query.filter_by(specialization_id=specialization_id).all()
+        # return [coach.to_dict() for coach in coaches]
