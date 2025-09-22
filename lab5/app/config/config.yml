@@ -1,2 +1,2 @@
 database:
-  uri: "mssql+pyodbc://typhoon:ThisIsPassword!@server-clouds.database.windows.net:1433/db-sports-managment?driver=ODBC+Driver+18+for+SQL+Server"
+  uri: "mssql+pyodbc://typhoon@server-clouds:ThisIsPassword!@server-clouds.database.windows.net:1433/db-sports-managment?driver=ODBC+Driver+18+for+SQL+Server&Encrypt=yes&TrustServerCertificate=no&Connection Timeout=30"
