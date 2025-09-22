@@ -24,7 +24,7 @@ def register_routes(app):
     app.register_blueprint(supplement_bp, url_prefix="/api")
     app.register_blueprint(doctor_bp, url_prefix="/api")
     app.register_blueprint(coach_specialization_bp, url_prefix="/api")
-    app.register_blueprint(coach_bp, url_prefix="/api")
+    app.register_blueprint(coach_bp)
     app.register_blueprint(coaches_contact_bp, url_prefix="/api")
     app.register_blueprint(program_bp, url_prefix="/api")
     app.register_blueprint(sportsman_has_supplement_bp, url_prefix="/api")
