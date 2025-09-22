@@ -8,17 +8,17 @@ coach_bp = Blueprint("coach", __name__)
 coach_controller = CoachController()
 
 @coach_bp.route("/coach", methods=['GET'])
-@swag_form('../swagger/coach.yaml', methods=['GET'])
+@swag_from('../swagger/coach.yaml', methods=['GET'])
 def get_coach():
     return coach_controller.get_all()
 
 @coach_bp.route("/coach/<int:coach_id>", methods=['GET'])
-@swag_form('../swagger/coach.yaml', methods=['GET'])
+@swag_from('../swagger/coach.yaml', methods=['GET'])
 def get_coach_by_id(coach_id):
     return coach_controller.get_by_id(coach_id)
 
 @coach_bp.route("/coach", methods=['POST'])
-@swag_form('../swagger/coach.yaml', methods=['POST'])
+@swag_from('../swagger/coach.yaml', methods=['POST'])
 def add_coach():
     data = request.get_json()
     # use data["id"], data["name"], etc.
@@ -28,17 +28,17 @@ def add_coach():
 #     return coach_controller.create()
 
 @coach_bp.route("/coach/<int:coach_id>", methods=['PATCH'])
-@swag_form('../swagger/coach.yaml', methods=['PATCH'])
+@swag_from('../swagger/coach.yaml', methods=['PATCH'])
 def update_coach(coach_id):
     return coach_controller.update(coach_id)
 
 @coach_bp.route("/coach/<int:coach_id>", methods=['DELETE'])
-@swag_form('../swagger/coach.yaml', methods=['DELETE'])
+@swag_from('../swagger/coach.yaml', methods=['DELETE'])
 def delete_coach(coach_id):
     return coach_controller.delete(coach_id)
 
 @coach_bp.route("/coach/insert", methods=['POST'])
-@swag_form('../swagger/coach.yaml', methods=['POST'])
+@swag_from('../swagger/coach.yaml', methods=['POST'])
 def insert_coach():
     try:
         data = request.get_json()
