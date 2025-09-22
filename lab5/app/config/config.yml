@@ -1,2 +1,2 @@
 database:
-  uri: "mysql+pymysql://root:12345@localhost:3306/lab4"
+  uri: "mssql+pyodbc://typhoon:ThisIsPassword!@server-clouds.database.windows.net:1433/db-sports-managment?driver=ODBC+Driver+18+for+SQL+Server"

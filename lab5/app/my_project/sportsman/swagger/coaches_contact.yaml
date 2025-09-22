@@ -1,0 +1,62 @@
+/coaches_contact:
+  get:
+    tags: [Coaches Contact]
+    summary: Get all contacts
+    responses:
+      200:
+        description: List of contacts
+
+  post:
+    tags: [Coaches Contact]
+    summary: Add contact
+    parameters:
+      - in: body
+        name: body
+        required: true
+        schema:
+          type: object
+          properties:
+            id: { type: integer }
+            phone: { type: string }
+            email: { type: string }
+          required: [id, phone, email]
+    responses:
+      200:
+        description: Contact added
+
+/coaches_contact/{coaches_contact_id}:
+  get:
+    tags: [Coaches Contact]
+    summary: Get contact by ID
+    parameters:
+      - in: path
+        name: coaches_contact_id
+        required: true
+        type: integer
+    responses:
+      200:
+        description: A single contact
+
+  patch:
+    tags: [Coaches Contact]
+    summary: Update contact
+    parameters:
+      - in: path
+        name: coaches_contact_id
+        required: true
+        type: integer
+    responses:
+      200:
+        description: Updated contact
+
+  delete:
+    tags: [Coaches Contact]
+    summary: Delete contact
+    parameters:
+      - in: path
+        name: coaches_contact_id
+        required: true
+        type: integer
+    responses:
+      200:
+        description: Deleted contact

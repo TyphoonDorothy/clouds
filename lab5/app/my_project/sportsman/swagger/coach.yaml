@@ -1,0 +1,112 @@
+swagger: "2.0"
+info:
+  title: Coach API
+  version: "1.0"
+  description: API for managing coaches
+
+paths:
+  /coach:
+    get:
+      tags:
+        - Coach
+      summary: Get all coaches
+      responses:
+        200:
+          description: List of coaches
+    post:
+      tags:
+        - Coach
+      summary: Add a new coach
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            type: object
+            properties:
+              id:
+                type: integer
+              name:
+                type: string
+              surname:
+                type: string
+              specialization_id:
+                type: integer
+              contact_id:
+                type: integer
+            required:
+              - id
+              - name
+              - surname
+      responses:
+        200:
+          description: Coach added
+
+  /coach/{coach_id}:
+    get:
+      tags:
+        - Coach
+      summary: Get coach by ID
+      parameters:
+        - name: coach_id
+          in: path
+          type: integer
+          required: true
+      responses:
+        200:
+          description: Coach details
+    patch:
+      tags:
+        - Coach
+      summary: Update a coach
+      parameters:
+        - name: coach_id
+          in: path
+          type: integer
+          required: true
+      responses:
+        200:
+          description: Coach updated
+    delete:
+      tags:
+        - Coach
+      summary: Delete a coach
+      parameters:
+        - name: coach_id
+          in: path
+          type: integer
+          required: true
+      responses:
+        200:
+          description: Coach deleted
+
+  /coach/insert:
+    post:
+      tags:
+        - Coach
+      summary: Insert coach via stored procedure
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            type: object
+            properties:
+              name:
+                type: string
+              surname:
+                type: string
+              specialization_id:
+                type: integer
+              contact_id:
+                type: integer
+            required:
+              - name
+              - surname
+              - specialization_id
+              - contact_id
+      responses:
+        201:
+          description: Coach added successfully
+        400:
+          description: Error
