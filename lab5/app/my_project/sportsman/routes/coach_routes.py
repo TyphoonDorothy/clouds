@@ -67,3 +67,12 @@ def insert_coach():
     except Exception as e:
         db.session.rollback()
         return jsonify({"error": str(e)}), 400
+
+
+@coach_bp.route("/dbping")
+def dbping():
+    try:
+        result = db.session.execute("SELECT 1").fetchone()
+        return {"ok": result[0]}
+    except Exception as e:
+        return {"error": str(e)}, 500
