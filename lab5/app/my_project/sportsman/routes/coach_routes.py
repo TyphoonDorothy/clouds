@@ -61,7 +61,7 @@ def add_coach():
               type: string
             surname:
               type: string
-            specialization_id:
+            coach_specialization_id:
               type: integer
             contact_id:
               type: integer
@@ -133,7 +133,7 @@ def insert_coach():
               type: string
             surname:
               type: string
-            specialization_id:
+            coach_specialization_id:
               type: integer
             contact_id:
               type: integer

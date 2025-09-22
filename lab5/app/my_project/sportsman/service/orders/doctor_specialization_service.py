@@ -17,5 +17,5 @@ class DoctorSpecializationService(GeneralService):
         return False
     
     def get_doctors_by_specialization(self, specialization_id):
-        doctors = db.session.query(Doctor).filter(Doctor.specialization_id == specialization_id).all()
+        doctors = db.session.query(Doctor).filter(Doctor.coach_specialization_id == specialization_id).all()
         return [doctor.to_dict() for doctor in doctors]
