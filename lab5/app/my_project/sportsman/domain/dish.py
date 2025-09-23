@@ -9,7 +9,6 @@ class Dish(db.Model):
     name = db.Column(db.String(45), nullable=False)
     calories = db.Column(db.Float, nullable=False)
 
-    program = db.relationship('ProgramHasDish', back_populates= 'dish')
     ingredient = db.relationship('DishHasIngredient', back_populates= 'dish')
 
     def to_dict(self):
