@@ -13,7 +13,6 @@ from .sportsman_has_supplement_routes import sportsman_has_supplement_bp
 from .sportsman_has_program_routes import sportsman_has_program_bp
 from .program_has_dish_routes import program_has_dish_bp
 from .dish_has_ingredient_routes import dish_has_ingredient_bp
-from .doctor_schedule_routes import doctor_schedule_bp
 
 def register_routes(app):
     app.register_blueprint(ingredient_bp, url_prefix="/api")
