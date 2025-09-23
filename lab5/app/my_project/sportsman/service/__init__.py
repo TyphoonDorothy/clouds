@@ -8,12 +8,8 @@ from ..domain.doctors_contact import DoctorsContact
 from ..dao.orders.doctors_contact_dao import DoctorsContactDAO
 from ..domain.doctor_specialization import DoctorSpecialization
 from ..dao.orders.doctor_specialization_dao import DoctorSpecializationDAO
-from ..domain.supplement import Supplement
-from ..dao.orders.supplement_dao import SupplementDAO
 from ..domain.doctor import Doctor
 from ..dao.orders.doctor_dao import DoctorDAO
-from ..domain.sportsman_has_supplement import SportsmanHasSupplement
-from ..dao.orders.sportsman_has_supplement_dao import SportsmanHasSupplementDAO
 from ..domain.coach_specialization import CoachSpecialization
 from ..dao.orders.coach_specialization_dao import CoachSpecializationDAO
 from ..domain.coach import Coach

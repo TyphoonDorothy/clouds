@@ -3,9 +3,6 @@ from ..service.orders.dish_service import DishService
 from ..service.orders.sportsman_service import SportsmanService
 from ..service.orders.doctors_contact_service import DoctorsContactService
 from ..service.orders.doctor_specialization_service import DoctorSpecializationService
-from ..service.orders.supplement_service import SupplementService
-from ..service.orders.doctor_service import DoctorService
-from ..service.orders.sportsman_has_supplement_service import SportsmanHasSupplementService
 from ..service.orders.coach_specialization_service import CoachSpecializationService
 from ..service.orders.coach_service import CoachService
 from ..service.orders.coaches_contact_service import CoachesContactService

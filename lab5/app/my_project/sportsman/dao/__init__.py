@@ -3,9 +3,7 @@ from ..domain.dish import Dish
 from ..domain.sportsman import Sportsman
 from ..domain.doctors_contact import DoctorsContact
 from ..domain.doctor_specialization import DoctorSpecialization
-from ..domain.supplement import Supplement
 from ..domain.doctor import Doctor
-from ..domain.sportsman_has_supplement import SportsmanHasSupplement
 from ..domain.coach_specialization import CoachSpecialization
 from ..domain.coach import Coach
 from ..domain.coaches_contact import CoachesContact
