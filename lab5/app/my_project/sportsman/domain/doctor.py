@@ -5,16 +5,23 @@ from sqlalchemy import ForeignKey
 class Doctor(db.Model):
     __tablename__ = "doctor"
 
-
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(45), nullable=False)
     surname = db.Column(db.String(45), nullable=False)
-    doctor_specialization_id = db.Column('doctor_specialization_id', db.Integer, ForeignKey('doctor_specialization.id'), nullable=False)
-    doctor_contacts_id = db.Column('doctors_contacts_id', db.Integer, ForeignKey('doctors_contact.id'), unique=True, nullable=False)
+    doctor_specialization_id = db.Column(
+        db.Integer,
+        ForeignKey('doctor_specialization.id'),
+        nullable=False
+    )
+    doctor_contact_id = db.Column(
+        db.Integer,
+        ForeignKey('doctors_contact.id'),
+        unique=True,
+        nullable=False
+    )
 
-
-    specialization = db.relationship('DoctorSpecialization', back_populates= 'doctors')
-    contact = db.relationship('DoctorsContact', back_populates= 'doctors')
+    specialization = db.relationship('DoctorSpecialization', back_populates='doctors')
+    contact = db.relationship('DoctorsContact', back_populates='doctors')
 
     def to_dict(self):
         return {
@@ -22,5 +29,5 @@ class Doctor(db.Model):
             "name": self.name,
             "surname": self.surname,
             "doctor_specialization_id": self.doctor_specialization_id,
-            "doctor_contacts_id": self.doctor_contact_id,
-        } 
+            "doctor_contact_id": self.doctor_contact_id,
+        }

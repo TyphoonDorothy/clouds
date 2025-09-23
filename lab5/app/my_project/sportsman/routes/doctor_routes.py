@@ -14,7 +14,7 @@ doctor_controller = DoctorController()
             'description': 'List of all doctors',
             'examples': {
                 'application/json': [
-                    {"id": 1, "name": "John", "surname": "Doe", "specialization_id": 2, "contact_id": 1}
+                    {"id": 1, "name": "John", "surname": "Doe", "doctor_specialization_id": 2, "doctor_contact_id": 1}
                 ]
             }
         }
@@ -28,19 +28,13 @@ def get_doctor():
 @swag_from({
     'tags': ['Doctor'],
     'parameters': [
-        {
-            'name': 'doctor_id',
-            'in': 'path',
-            'type': 'integer',
-            'required': True,
-            'description': 'ID of the doctor'
-        }
+        {'name': 'doctor_id', 'in': 'path', 'type': 'integer', 'required': True}
     ],
     'responses': {
         200: {
             'description': 'Doctor details',
             'examples': {
-                'application/json': {"id": 1, "name": "John", "surname": "Doe", "specialization_id": 2, "contact_id": 1}
+                'application/json': {"id": 1, "name": "John", "surname": "Doe", "doctor_specialization_id": 2, "doctor_contact_id": 1}
             }
         },
         404: {'description': 'Doctor not found'}
@@ -63,9 +57,9 @@ def get_doctor_by_id(doctor_id):
                     'name': {'type': 'string'},
                     'surname': {'type': 'string'},
                     'doctor_specialization_id': {'type': 'integer'},
-                    'doctors_contact_id': {'type': 'integer'}
+                    'doctor_contact_id': {'type': 'integer'}
                 },
-                'required': ['name', 'surname', 'specialization_id', 'contact_id']
+                'required': ['name', 'surname', 'doctor_specialization_id', 'doctor_contact_id']
             }
         }
     ],
@@ -91,7 +85,7 @@ def add_doctor():
                     'name': {'type': 'string'},
                     'surname': {'type': 'string'},
                     'doctor_specialization_id': {'type': 'integer'},
-                    'doctors_contact_id': {'type': 'integer'}
+                    'doctor_contact_id': {'type': 'integer'}
                 }
             }
         }
@@ -118,14 +112,3 @@ def update_doctor(doctor_id):
 })
 def delete_doctor(doctor_id):
     return doctor_controller.delete(doctor_id)
-
-
-# @doctor_bp.route('/doctor/generate', methods=['POST'])
-# @swag_from({
-#     'tags': ['Doctor'],
-#     'responses': {
-#         200: {'description': 'Databases and tables generated successfully'}
-#     }
-# })
-# def generate_databases_and_tables():
-#     return doctor_controller.generate_databases_and_tables()
