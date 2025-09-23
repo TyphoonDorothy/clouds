@@ -74,6 +74,26 @@ def add_doctors_contact():
 def update_doctors_contact(doctors_contact_id):
     return doctors_contact_controller.update(doctors_contact_id)
 
+@doctors_contact_bp.route("/doctors_contact/<int:doctors_contact_id>", methods=['GET'])
+@swag_from({
+    'tags': ['DoctorsContact'],
+    'parameters': [
+        {'name': 'doctors_contact_id', 'in': 'path', 'type': 'integer', 'required': True}
+    ],
+    'responses': {
+        200: {
+            'description': 'Doctors contact details',
+            'examples': {
+                'application/json': {"id": 1, "phone": "+123456789", "email": "doc@example.com"}
+            }
+        },
+        404: {'description': 'Doctors contact not found'}
+    }
+})
+def get_doctors_contact_by_id(doctors_contact_id):
+    return doctors_contact_controller.get_by_id(doctors_contact_id)
+
+
 
 @doctors_contact_bp.route("/doctors_contact/<int:doctors_contact_id>", methods=['DELETE'])
 @swag_from({
