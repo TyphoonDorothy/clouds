@@ -11,8 +11,8 @@ class GeneralService:
     def get_all(self):
         return [entity.to_dict() for entity in self.dao.get_all()]
     
-    def get_by_id(self, *entity_ids):
-        return self.dao.get_by_ids(*entity_ids)
+    def get_by_id(self, entity_ids):
+        return self.dao.get_by_id(entity_ids)
     
     def update(self, entity_id, **kwargs):
         entity = self.dao.get_by_id(entity_id)
