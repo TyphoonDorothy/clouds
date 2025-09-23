@@ -88,7 +88,7 @@ def add_ingredient():
         404: {'description': 'Ingredient not found'}
     }
 })
-def update_ingredient(ingredient_id): 
+def update_ingredient(ingredient_id):
     return ingredient_controller.update(ingredient_id)
 
 @ingredient_bp.route("/ingredients/<int:ingredient_id>", methods=['DELETE'])
