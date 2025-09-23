@@ -12,7 +12,6 @@ class Sportsman(db.Model):
     height = db.Column(db.Float, nullable=False)
     weight = db.Column(db.Float, nullable=False)
 
-    supplements = db.relationship('SportsmanHasSupplement', back_populates= 'sportsman')
     program = db.relationship('SportsmanHasProgram', back_populates= 'sportsman')
 
     def to_dict(self):
