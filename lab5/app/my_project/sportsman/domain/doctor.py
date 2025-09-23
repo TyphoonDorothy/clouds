@@ -9,9 +9,8 @@ class Doctor(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(45), nullable=False)
     surname = db.Column(db.String(45), nullable=False)
-    doctor_specialization_id = db.Column('doctor_specialization_id', db.Integer, ForeignKey('doctor_specialization.id'), nullable=False)
-    doctor_contact_id = db.Column('doctors_contact_id', db.Integer, ForeignKey('doctors_contact.id'), unique=True, nullable=False)
-
+    contact_id = db.Column("doctors_contact_id", db.Integer, ForeignKey('doctors_contact.id'), ...)
+    specialization_id = db.Column("doctor_specialization_id", db.Integer, ForeignKey('doctor_specialization.id'), ...)
 
     specialization = db.relationship('DoctorSpecialization', back_populates= 'doctors')
     contact = db.relationship('DoctorsContact', back_populates= 'doctors')
