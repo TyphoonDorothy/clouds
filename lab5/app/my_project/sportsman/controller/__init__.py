@@ -9,4 +9,5 @@ from ..service.orders.coaches_contact_service import CoachesContactService
 from ..service.orders.program_service import ProgramService
 from ..service.orders.sportsman_has_program_service import SportsmanHasProgramService
 from ..service.orders.program_has_dish_service import ProgramHasDishService
+from ..service.orders.doctor_service import DoctorService
 from ..service.orders.dish_has_ingredient_service import DishHasIngredientService
