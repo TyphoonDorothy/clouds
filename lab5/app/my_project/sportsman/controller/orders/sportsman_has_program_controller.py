@@ -26,3 +26,9 @@ class SportsmanHasProgramController(GeneralController):
             return handle_error(str(ve), 409)  # Business logic errors
         except Exception as e:
             return handle_error(f"Unexpected error: {str(e)}", 500)
+
+        def get_by_id(self, sportsman_id, program_id):
+            entity = self.service.dao.model.query.get((sportsman_id, program_id))
+            if entity:
+                return entity.to_dict(), 200
+            return {"error": "Not found"}, 404
