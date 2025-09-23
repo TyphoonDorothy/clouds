@@ -9,8 +9,8 @@ class GeneralController:
         data = self.service.get_all()
         return handle_response(data)
     
-    def get_by_id(self, entity_id):
-        entity = self.service.get_by_id(entity_id)
+    def get_by_id(self, *entity_ids):
+        entity = self.service.get_by_ids(*entity_ids)
 
         if entity:
             return handle_response(entity.to_dict())
