@@ -9,7 +9,6 @@ class Program(db.Model):
     name = db.Column(db.String(50), nullable=False)
 
     sportsman = db.relationship('SportsmanHasProgram', back_populates= 'program')
-    dish = db.relationship('ProgramHasDish', back_populates= 'program')
 
 
     def to_dict(self):
