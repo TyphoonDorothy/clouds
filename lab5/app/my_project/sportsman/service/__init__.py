@@ -28,5 +28,4 @@ from ..domain.program_has_dish import ProgramHasDish
 from ..dao.orders.program_has_dish_dao import ProgramHasDishDAO
 from ..domain.dish_has_ingredient import DishHasIngredient
 from ..dao.orders.dish_has_ingredient_dao import DishHasIngredientDAO
-from ..domain.doctor_schedule import DoctorSchedule
 from ..dao.orders.doctor_schedule_dao import DoctorScheduleDAO

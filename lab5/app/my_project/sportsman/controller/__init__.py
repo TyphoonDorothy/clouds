@@ -13,4 +13,3 @@ from ..service.orders.program_service import ProgramService
 from ..service.orders.sportsman_has_program_service import SportsmanHasProgramService
 from ..service.orders.program_has_dish_service import ProgramHasDishService
 from ..service.orders.dish_has_ingredient_service import DishHasIngredientService
-from ..service.orders.doctor_schedule_service import DoctorScheduleService
