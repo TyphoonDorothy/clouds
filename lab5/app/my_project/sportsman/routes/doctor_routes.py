@@ -57,7 +57,7 @@ def get_doctor_by_id(doctor_id):
                     'name': {'type': 'string'},
                     'surname': {'type': 'string'},
                     'doctor_specialization_id': {'type': 'integer'},
-                    'doctor_contact_id': {'type': 'integer'}
+                    'doctor_contact_id': {'type': 'integer'}   # singular here
                 },
                 'required': ['name', 'surname', 'doctor_specialization_id', 'doctor_contact_id']
             }
@@ -85,7 +85,7 @@ def add_doctor():
                     'name': {'type': 'string'},
                     'surname': {'type': 'string'},
                     'doctor_specialization_id': {'type': 'integer'},
-                    'doctor_contact_id': {'type': 'integer'}
+                    'doctor_contact_id': {'type': 'integer'}  
                 }
             }
         }

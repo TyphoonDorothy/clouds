@@ -1,7 +1,3 @@
-from my_project.database import db
-from sqlalchemy import ForeignKey
-
-
 class Doctor(db.Model):
     __tablename__ = "doctor"
 
@@ -13,7 +9,8 @@ class Doctor(db.Model):
         ForeignKey('doctor_specialization.id'),
         nullable=False
     )
-    doctor_contact_id = db.Column(
+    doctor_contact_id = db.Column(   # Python-side name
+        "doctors_contact_id",        # DB column name
         db.Integer,
         ForeignKey('doctors_contact.id'),
         unique=True,
@@ -29,5 +26,5 @@ class Doctor(db.Model):
             "name": self.name,
             "surname": self.surname,
             "doctor_specialization_id": self.doctor_specialization_id,
-            "doctor_contact_id": self.doctor_contact_id,
+            "doctor_contact_id": self.doctor_contact_id,  # singular for API
         }
