@@ -11,7 +11,7 @@ def get_programs():
 
 @program_bp.route("/programs/<int:program_id>", methods=['GET'])
 def get_program_by_id(program_id):
-    return program_controller.get_by_id(programt_id)
+    return program_controller.get_by_id(program_id)
 
 @program_bp.route("/programs", methods=['POST'])
 def add_program():
