@@ -1,3 +1,9 @@
+from flask import request, jsonify
+from my_project.sportsman.controller.general_controller import GeneralController
+from my_project.sportsman.controller.__init__ import SportsmanHasProgramService
+from my_project.sportsman.controller.utils import handle_error, handle_response
+
+
 class SportsmanHasProgramController(GeneralController):
     def __init__(self):
         super().__init__(SportsmanHasProgramService())
