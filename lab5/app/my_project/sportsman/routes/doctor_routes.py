@@ -62,8 +62,8 @@ def get_doctor_by_id(doctor_id):
                 'properties': {
                     'name': {'type': 'string'},
                     'surname': {'type': 'string'},
-                    'specialization_id': {'type': 'integer'},
-                    'contact_id': {'type': 'integer'}
+                    'doctor_specialization_id': {'type': 'integer'},
+                    'doctors_contact_id': {'type': 'integer'}
                 },
                 'required': ['name', 'surname', 'specialization_id', 'contact_id']
             }
