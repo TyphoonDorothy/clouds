@@ -45,26 +45,26 @@ def get_doctor_specialization_by_id(doctor_specialization_id):
     return doctor_specialization_controller.get_by_id(doctor_specialization_id)
 
 
-@doctor_specialization_bp.route("/doctor_specialization/<int:doctor_specialization_id>/doctors", methods=['GET'])
-@swag_from({
-    'tags': ['DoctorSpecialization'],
-    'parameters': [
-        {'name': 'doctor_specialization_id', 'in': 'path', 'type': 'integer', 'required': True,
-         'description': 'ID of the doctor specialization'}
-    ],
-    'responses': {
-        200: {
-            'description': 'List of doctors with this specialization',
-            'examples': {
-                'application/json': [
-                    {"id": 1, "name": "John", "surname": "Doe", "doctor_specialization_id": 1, "doctor_contact_id": 1}
-                ]
-            }
-        }
-    }
-})
-def get_doctors_by_specialization(doctor_specialization_id):
-    return jsonify(doctor_specialization_controller.service.get_doctors_by_specialization(doctor_specialization_id))
+# @doctor_specialization_bp.route("/doctor_specialization/<int:doctor_specialization_id>/doctors", methods=['GET'])
+# @swag_from({
+#     'tags': ['DoctorSpecialization'],
+#     'parameters': [
+#         {'name': 'doctor_specialization_id', 'in': 'path', 'type': 'integer', 'required': True,
+#          'description': 'ID of the doctor specialization'}
+#     ],
+#     'responses': {
+#         200: {
+#             'description': 'List of doctors with this specialization',
+#             'examples': {
+#                 'application/json': [
+#                     {"id": 1, "name": "John", "surname": "Doe", "doctor_specialization_id": 1, "doctor_contact_id": 1}
+#                 ]
+#             }
+#         }
+#     }
+# })
+# def get_doctors_by_specialization(doctor_specialization_id):
+#     return jsonify(doctor_specialization_controller.service.get_doctors_by_specialization(doctor_specialization_id))
 
 
 @doctor_specialization_bp.route("/doctor_specialization", methods=['POST'])
