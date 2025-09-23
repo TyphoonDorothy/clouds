@@ -125,12 +125,12 @@ def delete_sportsman(sportsman_id):
     return sportsman_controller.delete(sportsman_id)
 
 
-@sportsman_bp.route("/sportsman/noname", methods=['POST'])
-@swag_from({
-    'tags': ['Sportsman'],
-    'responses': {
-        201: {'description': 'Inserted noname rows successfully'}
-    }
-})
-def insert_nonames():
-    return sportsman_controller.insert_noname_rows()
+# @sportsman_bp.route("/sportsman/noname", methods=['POST'])
+# @swag_from({
+#     'tags': ['Sportsman'],
+#     'responses': {
+#         201: {'description': 'Inserted noname rows successfully'}
+#     }
+# })
+# def insert_nonames():
+#     return sportsman_controller.insert_noname_rows()
