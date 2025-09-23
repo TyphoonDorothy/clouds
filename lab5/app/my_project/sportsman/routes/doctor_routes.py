@@ -90,8 +90,8 @@ def add_doctor():
                 'properties': {
                     'name': {'type': 'string'},
                     'surname': {'type': 'string'},
-                    'specialization_id': {'type': 'integer'},
-                    'contact_id': {'type': 'integer'}
+                    'doctor_specialization_id': {'type': 'integer'},
+                    'doctors_contact_id': {'type': 'integer'}
                 }
             }
         }

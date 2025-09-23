@@ -10,7 +10,7 @@ class Doctor(db.Model):
     name = db.Column(db.String(45), nullable=False)
     surname = db.Column(db.String(45), nullable=False)
     doctor_specialization_id = db.Column('doctor_specialization_id', db.Integer, ForeignKey('doctor_specialization.id'), nullable=False)
-    doctor_contact_id = db.Column('doctors_contact_id', db.Integer, ForeignKey('doctors_contact.id'), unique=True, nullable=False)
+    doctor_contacts_id = db.Column('doctors_contacts_id', db.Integer, ForeignKey('doctors_contact.id'), unique=True, nullable=False)
 
 
     specialization = db.relationship('DoctorSpecialization', back_populates= 'doctors')
@@ -21,6 +21,6 @@ class Doctor(db.Model):
             "id": self.id,
             "name": self.name,
             "surname": self.surname,
-            "specialization_id": self.doctor_specialization_id,
-            "contact_id": self.doctor_contact_id,
+            "doctor_specialization_id": self.doctor_specialization_id,
+            "doctor_contacts_id": self.doctor_contact_id,
         } 
