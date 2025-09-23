@@ -31,4 +31,3 @@ def register_routes(app):
     app.register_blueprint(sportsman_has_program_bp, url_prefix="/api")
     app.register_blueprint(program_has_dish_bp, url_prefix="/api")
     app.register_blueprint(dish_has_ingredient_bp, url_prefix="/api")
-    app.register_blueprint(doctor_schedule_bp, url_prefix="/api")
