@@ -113,15 +113,15 @@ def delete_dish(dish_id):
     return dish_controller.delete(dish_id)
 
 
-@dish_bp.route("/dish/aggregate", methods=["GET"])
-def get_dish_aggregate():
-    """
-    Get dish aggregate stats (example: total calories, avg calories, etc.)
-    ---
-    tags:
-      - Dish
-    responses:
-      200:
-        description: Aggregate data for dishes
-    """
-    return dish_controller.get_dish_aggregate()
+# @dish_bp.route("/dish/aggregate", methods=["GET"])
+# def get_dish_aggregate():
+#     """
+#     Get dish aggregate stats (example: total calories, avg calories, etc.)
+#     ---
+#     tags:
+#       - Dish
+#     responses:
+#       200:
+#         description: Aggregate data for dishes
+#     """
+#     return dish_controller.get_dish_aggregate()
