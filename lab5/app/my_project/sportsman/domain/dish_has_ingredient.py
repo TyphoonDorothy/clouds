@@ -4,7 +4,7 @@ from sqlalchemy import ForeignKey
 
 
 class DishHasIngredient(db.Model):
-    __tablename__ = "dish_has_ingredient"
+    __tablename__ = "dish_ingredient"
     
     dish_id = db.Column(db.Integer, ForeignKey('dish.id'), primary_key=True)
     ingredient_id = db.Column(db.Integer, ForeignKey('ingredient.id'), primary_key=True)
