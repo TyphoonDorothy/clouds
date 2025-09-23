@@ -1,3 +1,7 @@
+from my_project.database import db
+from sqlalchemy import ForeignKey
+
+
 class Doctor(db.Model):
     __tablename__ = "doctor"
 
@@ -28,3 +32,4 @@ class Doctor(db.Model):
             "doctor_specialization_id": self.doctor_specialization_id,
             "doctor_contact_id": self.doctor_contact_id,  # singular for API
         }
+yy
