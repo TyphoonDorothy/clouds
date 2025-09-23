@@ -120,12 +120,12 @@ def delete_doctor(doctor_id):
     return doctor_controller.delete(doctor_id)
 
 
-@doctor_bp.route('/doctor/generate', methods=['POST'])
-@swag_from({
-    'tags': ['Doctor'],
-    'responses': {
-        200: {'description': 'Databases and tables generated successfully'}
-    }
-})
-def generate_databases_and_tables():
-    return doctor_controller.generate_databases_and_tables()
+# @doctor_bp.route('/doctor/generate', methods=['POST'])
+# @swag_from({
+#     'tags': ['Doctor'],
+#     'responses': {
+#         200: {'description': 'Databases and tables generated successfully'}
+#     }
+# })
+# def generate_databases_and_tables():
+#     return doctor_controller.generate_databases_and_tables()
