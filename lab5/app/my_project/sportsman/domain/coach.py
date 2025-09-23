@@ -10,7 +10,7 @@ class Coach(db.Model):
     name = db.Column(db.String(45), nullable=False)
     surname = db.Column(db.String(45), nullable=False)
     coach_specialization_id = db.Column(db.Integer, ForeignKey('coach_specialization.id'), nullable=False)
-    contact_id = db.Column(db.Integer, ForeignKey('coaches_contact.id'), unique=True, nullable=False)
+    contact_id = db.Column(db.Integer, ForeignKey('coach_contact.id'), unique=True, nullable=False)
 
 
     specialization = db.relationship('CoachSpecialization', back_populates='coaches')
