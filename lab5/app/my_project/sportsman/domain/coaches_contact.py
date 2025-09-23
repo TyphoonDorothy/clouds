@@ -2,7 +2,7 @@ from my_project.database import db
 
 
 class CoachesContact(db.Model):
-    __tablename__ = "coaches_contact"
+    __tablename__ = "coach_contact"
 
 
     id = db.Column(db.Integer, primary_key=True)
