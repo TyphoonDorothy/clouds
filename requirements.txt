@@ -60,3 +60,4 @@ urllib3
 wadllib
 wheel
 zope.interface
+gunicorn
