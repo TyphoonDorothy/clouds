@@ -1,7 +1,6 @@
 attrs
 Automat
 Babel
-bcc
 bcrypt
 blinker
 boto3
@@ -43,7 +42,6 @@ PyHamcrest
 PyJWT
 pyOpenSSL
 pyparsing
-pyparted
 pyrsistent
 pyserial
 python-magic
