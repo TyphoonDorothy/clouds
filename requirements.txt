@@ -54,7 +54,11 @@ requests
 rich
 s3transfer
 service-identity
+setuptools
+six
 Twisted
+typing_extensions
 urllib3
 wadllib
+wheel
 zope.interface
