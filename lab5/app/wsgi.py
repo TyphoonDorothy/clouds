@@ -5,8 +5,8 @@ import os
 
 app = create_app()
 
-username_app = os.getenv('USER', 'admin')
-password_app = os.getenv('PASSWORD', 'password')
+username_app = os.getenv('USER')
+password_app = os.getenv('PASSWORD')
 
 
 def authenticate():
@@ -30,6 +30,15 @@ def requires_auth(f):
         return f(*args, **kwargs)
 
     return decorated
+
+@app.before_request
+def require_authentication():
+    if request.endpoint and request.endpoint.startswith('static'):
+        return
+    auth = request.authorization
+    print(f"Before request - Auth received: {auth}")
+    if not auth or auth.username != username_app or auth.password != password_app:
+        return authenticate()
 
 
 @app.route("/")
