@@ -32,25 +32,11 @@ def requires_auth(f):
     return decorated
 
 
-@app.route("/test")
-def test():
-    return "This works without auth"
-
-
 @app.route("/")
 @requires_auth
 def index():
     return "Hello, you are authenticated!"
 
-
-@app.route("/debug")
-def debug():
-    return {
-        "expected_user": username_app,
-        "password_set": bool(password_app),
-        "env_user": os.getenv('APP_USER'),
-        "env_pass_set": bool(os.getenv('APP_PASSWORD'))
-    }
 
 
 if __name__ == "__main__":
