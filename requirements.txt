@@ -60,6 +60,7 @@ python-dateutil==2.9.0.post0
 python-magic==0.4.27
 pytz==2025.2
 PyYAML==6.0.2
+pymysql
 referencing==0.36.2
 requests==2.32.5
 rich==14.1.0
