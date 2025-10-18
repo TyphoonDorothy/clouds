@@ -10,6 +10,15 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Login to Azure
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Confirm Azure login (debug)
+        run: |
+          az account show
+
       - name: Show repo root (debug)
         run: |
           echo "Working directory: $(pwd)"
@@ -18,19 +27,13 @@ jobs:
       - name: Build and deploy to Azure Container Apps
         uses: azure/container-apps-deploy-action@v2
         with:
-          # Path to application source directory (no trailing dot)
+          azureCredentials: ${{ secrets.AZURE_CREDENTIALS }}
           appSourcePath: '.'
-          # Path to Dockerfile relative to the repo root or appSourcePath
           dockerfilePath: 'Dockerfile'
-          # Image name to build and push (example)
           imageToBuild: ${{ secrets.ACR_LOGIN_SERVER }}/ca-clouds-lab2:${{ github.sha }}
-          # Registry credentials (or use acrName + acrUsername + acrPassword)
           registryUrl: ${{ secrets.ACR_LOGIN_SERVER }}
           registryUsername: ${{ secrets.ACR_USERNAME }}
           registryPassword: ${{ secrets.ACR_PASSWORD }}
-          # Container Apps details
           containerAppName: ca-clouds-lab2
           resourceGroup: rg-clouds-labs
           containerAppEnvironment: managedEnvironment-rgcloudslabs-8756
-          # Optional: show logs from action
-          disableTelemetry: 'false'
