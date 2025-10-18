@@ -1,0 +1,11 @@
+# Ignore all venvs recursively
+**/venv/
+**/__pycache__/
+**/.idea/
+**/.vscode/
+**/.git/
+**/*.pyc
+**/*.pyo
+**/*.pyd
+**/.DS_Store
+**/Thumbs.db
