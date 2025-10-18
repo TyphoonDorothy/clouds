@@ -12,4 +12,5 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY lab5 ./lab5
 EXPOSE 5000
-CMD ["gunicorn", "--bind", "0.0.0.0:5000", "--pythonpath", "/app/lab5", "app.wsgi:app"]
+WORKDIR /app/lab5
+CMD ["gunicorn", "--bind", "0.0.0.0:5000", "app.wsgi:app"]
