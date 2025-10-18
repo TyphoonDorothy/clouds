@@ -5,10 +5,16 @@ from my_project.database import db
 from my_project.sportsman.routes.__init__ import register_routes
 from flasgger import Swagger
 
+
 def create_app():
     app = Flask(__name__)
 
-    config_path = os.path.join(os.path.dirname(__file__), "../config/config.yml")
+    # Use absolute path based on the location of this file
+    config_path = os.path.join(os.path.dirname(__file__), "config", "config.yml")
+
+    if not os.path.exists(config_path):
+        raise FileNotFoundError(f"Config file not found at {config_path}")
+
     with open(config_path, 'r') as f:
         config = yaml.safe_load(f)
 
