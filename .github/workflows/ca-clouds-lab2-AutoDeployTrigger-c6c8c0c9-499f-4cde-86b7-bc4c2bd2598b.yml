@@ -28,7 +28,7 @@ jobs:
           subscription-id: ${{ secrets.CACLOUDSLAB2_AZURE_SUBSCRIPTION_ID }}
 
       - name: Build and push container image to registry
-        uses: azure/container-apps-deploy@v2,
+        uses: azure/container-apps-deploy-action@v2,
         with:
           registryUrl: crcoudslab2.azurecr.io
           registryUsername: ${{ secrets.CACLOUDSLAB2_REGISTRY_USERNAME }}
@@ -38,5 +38,6 @@ jobs:
           imageToBuild: crcoudslab2.azurecr.io/ca-clouds-lab2:${{ github.sha }}
           dockerfilePath: ./Dockerfile    # <-- path to your Dockerfile
           appSourcePath: ./               # <-- root of your source
+
 
 
