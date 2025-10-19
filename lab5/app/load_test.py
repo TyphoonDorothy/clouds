@@ -24,7 +24,7 @@ class LoadTester:
             time.sleep(random.uniform(0.1, 0.5))
 
     def run(self):
-        """Run the load test"""
+        print(f"Starting load test: {self.num_threads} threads for {self.duration}s")
         start_time = time.time()
         threads = []
 
@@ -41,6 +41,7 @@ class LoadTester:
             pass
 
         self.stop_flag = True
+        print("Load test completed")
 
 
 if __name__ == "__main__":
