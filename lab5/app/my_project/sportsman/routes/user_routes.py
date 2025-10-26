@@ -8,8 +8,7 @@ user_controller = UserController()
 
 
 @user_bp.route("/login", methods=['POST'])
-@jwt_required()
-def add_dish():
+def user_dish():
     """
     Create a new user
     ---
@@ -26,7 +25,7 @@ def add_dish():
           properties:
             username:
               type: string
-            calories:
+            password:
               password: string
     responses:
       201:
@@ -36,7 +35,7 @@ def add_dish():
 
 
 
-@user_bp.route("/dish/<int:user_id>", methods=['DELETE'])
+@user_bp.route("/login/<int:user_id>", methods=['DELETE'])
 def delete_user(user_id):
     """
     Delete a user
