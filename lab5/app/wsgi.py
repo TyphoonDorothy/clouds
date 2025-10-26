@@ -1,6 +1,7 @@
 from my_project import create_app
-from flask import Flask, request, Response, make_response
+from flask import Flask, request, Response, make_response, jsonify
 from flask_jwt_extended import JWTManager, create_access_token, jwt_required
+from flask_bcrypt import Bcrypt
 from my_project.sportsman.domain.user import User
 
 app = create_app()
@@ -9,6 +10,7 @@ app.config["JWT_SECRET_KEY"] = 'your_jwt_secret_key'
 app.config['JWT_TOKEN_LOCATION'] = ['headers']
 
 jwt = JWTManager(app)
+bcrypt = Bcrypt(app)
 
 @app.route('/login', methods=['POST'])
 def login():
