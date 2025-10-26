@@ -23,4 +23,4 @@ from ..dao.orders.sportsman_has_program_dao import SportsmanHasProgramDAO
 from ..domain.dish_has_ingredient import DishHasIngredient
 from ..dao.orders.dish_has_ingredient_dao import DishHasIngredientDAO
 from ..dao.orders.user_dao import UserDAO
-from ..dao.orders.user import User
+from ..domain.user import User
