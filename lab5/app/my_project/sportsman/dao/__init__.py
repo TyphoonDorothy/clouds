@@ -10,3 +10,4 @@ from ..domain.coaches_contact import CoachesContact
 from ..domain.program import Program
 from ..domain.sportsman_has_program import SportsmanHasProgram
 from ..domain.dish_has_ingredient import DishHasIngredient
+from ..domain.user import User
