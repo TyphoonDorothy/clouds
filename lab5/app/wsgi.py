@@ -1,7 +1,7 @@
 from my_project import create_app
 from flask import Flask, request, Response, make_response
 from flask_jwt_extended import JWTManager, create_access_token, jwt_required
-from .my_project.sportsman.domain.user import User
+from my_project.sportsman.domain.user import User
 
 app = create_app()
 app.config['SECRET_KEY'] = 'your_strong_secret_key'
