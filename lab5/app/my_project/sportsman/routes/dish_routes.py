@@ -1,5 +1,7 @@
 from flask import Blueprint
 from ..controller.orders.dish_controller import DishController
+from flask_jwt_extended import JWTManager, create_access_token, jwt_required
+
 
 dish_bp = Blueprint("dishes", __name__)
 dish_controller = DishController()
@@ -39,6 +41,7 @@ def get_dish_by_id(dish_id):
 
 
 @dish_bp.route("/dish", methods=['POST'])
+@jwt_required()
 def add_dish():
     """
     Add new dish

@@ -47,7 +47,7 @@ class LoadTester:
 if __name__ == "__main__":
     tester = LoadTester(
         base_url="https://ca-clouds-lab2.whitecliff-197d7c49.uksouth.azurecontainerapps.io",
-        num_threads=20,
+        num_threads=1000,
         duration_seconds=120
     )
     tester.run()
