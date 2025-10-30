@@ -41,7 +41,7 @@ def get_dish_by_id(dish_id):
 
 
 @dish_bp.route("/dish", methods=['POST'])
-@jwt_required()
+# @jwt_required()
 def add_dish():
     """
     Add new dish
