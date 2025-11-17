@@ -9,7 +9,6 @@ app = create_app()
 with app.app_context():
     username = input("Username: ").strip()
     password = getpass("Password: ")
-    email = input("Email (optional): ").strip() or None
 
     if db.session.query(User).filter_by(username=username).first():
         print("User already exists:", username)
