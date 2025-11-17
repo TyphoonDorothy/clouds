@@ -3,7 +3,7 @@ from getpass import getpass
 from werkzeug.security import generate_password_hash
 from my_project import create_app
 from my_project.database import db
-from auth.model import User
+from my_project.auth.model import User
 
 app = create_app()
 with app.app_context():

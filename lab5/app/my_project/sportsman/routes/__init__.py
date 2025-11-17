@@ -10,7 +10,7 @@ from .coaches_contact_routes import coaches_contact_bp
 from .program_routes import program_bp
 from .sportsman_has_program_routes import sportsman_has_program_bp
 from .dish_has_ingredient_routes import dish_has_ingredient_bp
-from app.auth.routes import auth_bp
+from my_project.auth.routes import auth_bp
 
 def register_routes(app):
     app.register_blueprint(ingredient_bp, url_prefix="/api")
