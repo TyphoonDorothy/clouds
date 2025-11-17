@@ -4,7 +4,6 @@ import os
 from my_project.database import db
 from my_project.sportsman.routes.__init__ import register_routes
 from flasgger import Swagger
-from my_project.auth.routes import bp as auth_bp
 from flask import url_for
 
 SWAGGER_TEMPLATE = {

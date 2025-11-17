@@ -1,14 +1,15 @@
 from flask import Blueprint, jsonify, request, current_app
 from flask_jwt_extended import (
-    create_access_token,
-    create_refresh_token,
-    jwt_required,
-    get_jwt_identity,
-    get_jwt
+    create_access_token, create_refresh_token,
+    jwt_required, get_jwt_identity, get_jwt
 )
 from werkzeug.security import check_password_hash
-from ..auth.model import User
+
+# correct import for model in the same package
+from .model import User
 from my_project.database import db
+
+auth_bp = Blueprint("auth", __name__)
 
 auth_bp = Blueprint("auth", __name__)
 
