@@ -45,40 +45,6 @@ def create_user_in_db(username: str, password: str):
 
 @auth_bp.route("/register", methods=["POST"])
 def register():
-    """
-    Register a new user without email or password length restriction
-    ---
-    tags:
-      - auth
-    consumes:
-      - application/json
-    parameters:
-      - in: body
-        name: body
-        required: true
-        schema:
-          type: object
-          properties:
-            username:
-              type: string
-            password:
-              type: string
-          required:
-            - username
-            - password
-    responses:
-      201:
-        description: user created
-        schema:
-          type: object
-          properties:
-            id:
-              type: integer
-            username:
-              type: string
-      400:
-        description: bad input or username exists
-    """
     data = request.json or {}
     username = (data.get("username") or "").strip()
     password = data.get("password") or ""

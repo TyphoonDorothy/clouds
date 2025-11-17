@@ -4,7 +4,7 @@ import os
 from my_project.database import db
 from my_project.sportsman.routes.__init__ import register_routes
 from flasgger import Swagger
-from flask import url_for
+from flask_jwt_extended import JWTManager
 
 SWAGGER_TEMPLATE = {
     "swagger": "2.0",
@@ -29,17 +29,15 @@ SWAGGER_CONFIG = {
             "model_filter": lambda tag: True,
         }
     ],
-    # IMPORTANT: pass requestInterceptor as a string that will be evaluated in the browser
     "swagger_ui_parameters": {
-        # the global requestInterceptor function name we defined in swagger_auth.js
-        # swagger-ui expects an actual function; Flasgger will place the string as-is in JS config
         "requestInterceptor": "window.swaggerRequestInterceptor"
     },
-    # add the custom JS file so it runs inside Swagger UI
     "swagger_ui_js": [
-        "/static/swagger_auth.js"   # Flask serves static files from my_project/static by default
+        "/static/swagger_auth.js"
     ],
 }
+
+jwt = JWTManager()  # create instance globally so other modules can import
 
 def create_app():
     app = Flask(__name__)
@@ -50,11 +48,11 @@ def create_app():
 
     app.config['SQLALCHEMY_DATABASE_URI'] = config['database']['uri']
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    app.config['JWT_SECRET_KEY'] = config.get('jwt_secret_key', 'replace_with_secure_random')  # required
 
     db.init_app(app)
-
+    jwt.init_app(app)  # initialize JWTManager
     register_routes(app)
-
     Swagger(app, template=SWAGGER_TEMPLATE)
 
     return app
