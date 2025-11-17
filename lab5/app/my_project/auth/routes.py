@@ -7,8 +7,109 @@ from flask_jwt_extended import (
 from werkzeug.security import check_password_hash
 from .model import User
 from my_project.database import db
+from werkzeug.security import generate_password_hash
+from sqlalchemy.exc import IntegrityError
 
 auth_bp = Blueprint("auth", __name__)
+
+def create_user_in_db(username: str, password: str):
+    """
+    Helper: creates a user row and commits. Raises ValueError on validation error.
+    Returns the created User instance.
+    """
+    username = (username or "").strip()
+    if not username:
+        raise ValueError("username required")
+    if not password:
+        raise ValueError("password required")
+
+    # check existence
+    existing = db.session.query(User).filter_by(username=username).first()
+    if existing:
+        raise ValueError("username_exists")
+
+    pw_hash = generate_password_hash(password)
+    user = User(username=username, password_hash=pw_hash)
+    db.session.add(user)
+    try:
+        db.session.commit()
+    except IntegrityError as e:
+        db.session.rollback()
+        raise ValueError("username_exists") from e
+
+    current_app.logger.info("[AUTH] Created user id=%s username=%s", user.id, user.username)
+    print(f"[AUTH] created user id={user.id} username={user.username}", flush=True)
+
+    return user
+
+
+@auth_bp.route("/register", methods=["POST"])
+def register():
+    """
+    Register a new user without email or password length restriction
+    ---
+    tags:
+      - auth
+    consumes:
+      - application/json
+    parameters:
+      - in: body
+        name: body
+        required: true
+        schema:
+          type: object
+          properties:
+            username:
+              type: string
+            password:
+              type: string
+          required:
+            - username
+            - password
+    responses:
+      201:
+        description: user created
+        schema:
+          type: object
+          properties:
+            id:
+              type: integer
+            username:
+              type: string
+      400:
+        description: bad input or username exists
+    """
+    data = request.json or {}
+    username = (data.get("username") or "").strip()
+    password = data.get("password") or ""
+
+    try:
+        user = create_user_in_db(username=username, password=password)
+    except ValueError as e:
+        msg = str(e)
+        if msg == "username_exists":
+            current_app.logger.info("[AUTH] Register attempt failed - username exists: %s", username)
+            return jsonify({"msg": "username already exists"}), 400
+        else:
+            current_app.logger.info("[AUTH] Register attempt failed - %s", msg)
+            return jsonify({"msg": msg}), 400
+    except Exception as e:
+        current_app.logger.exception("[AUTH] Unexpected error creating user")
+        return jsonify({"msg": "internal error"}), 500
+
+    # Generate JWT tokens immediately
+    access = create_access_token(identity=user.id)
+    refresh = create_refresh_token(identity=user.id)
+
+    print(f"[JWT] Created access token for new user id={user.id} username={user.username}", flush=True)
+    print(f"[JWT] Created refresh token for new user id={user.id} username={user.username}", flush=True)
+
+    return jsonify({
+        "id": user.id,
+        "username": user.username,
+        "access_token": access,
+        "refresh_token": refresh
+    }), 201
 
 @auth_bp.route("/login", methods=["POST"])
 def login():
