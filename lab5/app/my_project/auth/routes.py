@@ -103,12 +103,11 @@ def register():
         current_app.logger.exception("[AUTH] Unexpected error creating user")
         return jsonify({"msg": "internal error"}), 500
 
-    # CRITICAL FIX: Convert user.id to string
     access = create_access_token(identity=str(user.id))
     refresh = create_refresh_token(identity=str(user.id))
 
     print(f"[JWT] Created access token for new user id={user.id} username={user.username}", flush=True)
-    print(f"[JWT] Created refresh token for new user id={user.id} username={user.username}", flush=True)
+  
 
     return jsonify({
         "id": user.id,
@@ -174,13 +173,10 @@ def login():
 
     # CRITICAL FIX: Convert user.id to string
     access = create_access_token(identity=str(user.id))
-    refresh = create_refresh_token(identity=str(user.id))
 
-    # log (use debug for token string) and forced prints for immediate visibility
     current_app.logger.info(f"[JWT] Created tokens for user id={user.id} username={user.username}")
     current_app.logger.debug(f"[JWT] access={access}")
     print(f"[JWT] access={access}", flush=True)
-    print(f"[JWT] refresh={refresh}", flush=True)
 
     return jsonify(access_token=access, refresh_token=refresh), 200
 

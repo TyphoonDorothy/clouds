@@ -31,15 +31,13 @@ def create_app():
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.config['JWT_SECRET_KEY'] = config.get('jwt_secret_key', 'nklnknl')
     
-    # ===== CRITICAL: ALL CSRF SETTINGS =====
     app.config['JWT_COOKIE_CSRF_PROTECT'] = False
     app.config['WTF_CSRF_ENABLED'] = False
     app.config['JWT_CSRF_CHECK_FORM'] = False
     app.config['JWT_CSRF_IN_COOKIES'] = False
-    # =======================================
     
     db.init_app(app)
-    jwt.init_app(app)  # JWTManager MUST be initialized AFTER config is set
+    jwt.init_app(app)  
     register_routes(app)
     
     # Initialize Swagger with template

@@ -4,32 +4,42 @@ from ..controller.orders.coach_controller import CoachController
 from my_project.database import db
 from flasgger import swag_from
 from ..domain.coach import Coach
+from flask_jwt_extended import jwt_required, get_jwt_identity
 
 coach_bp = Blueprint("coach", __name__)
 coach_controller = CoachController()
 
 
 @coach_bp.route("/coach", methods=['GET'])
+@jwt_required()
 def get_coach():
     """
     Get all coaches
     ---
     tags:
       - Coach
+    security:
+      - BearerAuth: []
     responses:
       200:
         description: List of coaches
+      401:
+        description: Missing or invalid token
     """
+    user_id = get_jwt_identity()
     return coach_controller.get_all()
 
 
 @coach_bp.route("/coach/<int:coach_id>", methods=['GET'])
+@jwt_required()
 def get_coach_by_id(coach_id):
     """
     Get coach by ID
     ---
     tags:
       - Coach
+    security:
+      - BearerAuth: []
     parameters:
       - name: coach_id
         in: path
@@ -38,17 +48,25 @@ def get_coach_by_id(coach_id):
     responses:
       200:
         description: Coach details
+      401:
+        description: Missing or invalid token
+      404:
+        description: Coach not found
     """
+    user_id = get_jwt_identity()
     return coach_controller.get_by_id(coach_id)
 
 
 @coach_bp.route("/coach", methods=['POST'])
+@jwt_required()
 def add_coach():
     """
     Add a new coach
     ---
     tags:
       - Coach
+    security:
+      - BearerAuth: []
     parameters:
       - in: body
         name: body
@@ -71,9 +89,14 @@ def add_coach():
             - name
             - surname
     responses:
-      200:
+      201:
         description: Coach added
+      400:
+        description: Invalid input
+      401:
+        description: Missing or invalid token
     """
+    user_id = get_jwt_identity()
     data = request.get_json()
     new_coach = Coach(
         id=data.get("id"),
@@ -92,21 +115,45 @@ def add_coach():
 
 
 @coach_bp.route("/coach/<int:coach_id>", methods=['PATCH'])
+@jwt_required()
 def update_coach(coach_id):
     """
     Update a coach
     ---
     tags:
       - Coach
+    security:
+      - BearerAuth: []
     parameters:
       - name: coach_id
         in: path
         type: integer
         required: true
+      - in: body
+        name: body
+        required: true
+        schema:
+          type: object
+          properties:
+            name:
+              type: string
+            surname:
+              type: string
+            coach_specialization_id:
+              type: integer
+            contact_id:
+              type: integer
     responses:
       200:
         description: Coach updated
+      400:
+        description: Invalid input
+      401:
+        description: Missing or invalid token
+      404:
+        description: Coach not found
     """
+    user_id = get_jwt_identity()
     coach = Coach.query.get(coach_id)
     if not coach:
         return jsonify({"error": "Coach not found"}), 404
@@ -137,12 +184,15 @@ def update_coach(coach_id):
 
 
 @coach_bp.route("/coach/<int:coach_id>", methods=['DELETE'])
+@jwt_required()
 def delete_coach(coach_id):
     """
     Delete a coach
     ---
     tags:
       - Coach
+    security:
+      - BearerAuth: []
     parameters:
       - name: coach_id
         in: path
@@ -151,60 +201,11 @@ def delete_coach(coach_id):
     responses:
       200:
         description: Coach deleted
+      401:
+        description: Missing or invalid token
+      404:
+        description: Coach not found
     """
+    user_id = get_jwt_identity()
     return coach_controller.delete(coach_id)
 
-
-# @coach_bp.route("/coach/insert", methods=['POST'])
-# def insert_coach():
-#     """
-#     Insert coach via stored procedure
-#     ---
-#     tags:
-#       - Coach
-#     parameters:
-#       - in: body
-#         name: body
-#         required: true
-#         schema:
-#           type: object
-#           properties:
-#             name:
-#               type: string
-#             surname:
-#               type: string
-#             coach_specialization_id:
-#               type: integer
-#             contact_id:
-#               type: integer
-#           required:
-#             - name
-#             - surname
-#             - specialization_id
-#             - contact_id
-#     responses:
-#       201:
-#         description: Coach added successfully
-#       400:
-#         description: Error
-#     """
-#     try:
-#         data = request.get_json()
-#         name = data.get('name')
-#         surname = data.get('surname')
-#         specialization_id = data.get('specialization_id')
-#         contact_id = data.get('contact_id')
-#
-#         if not name or not surname or not specialization_id or not contact_id:
-#             return jsonify({"error": "All fields are required."}), 400
-#
-#         db.session.execute(
-#             text("""CALL insert_into_coach(:name, :surname, :specialization_id, :contact_id)"""),
-#             {"name": name, "surname": surname, "specialization_id": specialization_id, "contact_id": contact_id}
-#         )
-#         db.session.commit()
-#
-#         return jsonify({"message": "Coach added successfully."}), 201
-#     except Exception as e:
-#         db.session.rollback()
-#         return jsonify({"error": str(e)}), 400
