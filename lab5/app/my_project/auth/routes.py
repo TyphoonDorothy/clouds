@@ -144,32 +144,6 @@ def login():
     return jsonify(access_token=access, refresh_token=refresh), 200
 
 
-@auth_bp.route("/refresh", methods=["POST"])
-@jwt_required(refresh=True)
-def refresh():
-    """
-    Refresh access token using a refresh JWT
-    ---
-    tags:
-      - auth
-    security:
-      - BearerAuth: []
-    responses:
-      200:
-        description: new access token
-        schema:
-          type: object
-          properties:
-            access_token:
-              type: string
-      401:
-        description: invalid or expired refresh token
-    """
-    current_user = get_jwt_identity()
-    new_access = create_access_token(identity=current_user)
-    current_app.logger.info(f"[JWT] Refresh used by user id={current_user}")
-    print(f"[JWT] new_access={new_access}", flush=True)
-    return jsonify(access_token=new_access), 200
 
 
 @auth_bp.route("/logout", methods=["POST"])
@@ -218,7 +192,6 @@ def protected():
       401:
         description: missing token
     """
-    print(f"[DEBUG] Token successfully decoded, identity is: {get_jwt_identity()}", flush=True)
     user_id = get_jwt_identity()
     current_app.logger.info(f"[JWT] Protected route accessed by user id={user_id}")
     user = db.session.get(User, user_id)
