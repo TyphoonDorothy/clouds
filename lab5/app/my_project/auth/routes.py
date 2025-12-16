@@ -178,7 +178,7 @@ def login():
     current_app.logger.debug(f"[JWT] access={access}")
     print(f"[JWT] access={access}", flush=True)
 
-    return jsonify(access_token=access, refresh_token=refresh), 200
+    return jsonify(access_token=access), 200
 
 
 @auth_bp.route("/protected", methods=["GET"])
