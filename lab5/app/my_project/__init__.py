@@ -21,26 +21,31 @@ SWAGGER_TEMPLATE = {
 
 def create_app():
     app = Flask(__name__)
-
     jwt = JWTManager()
-
+    
     config_path = os.path.join(os.path.dirname(__file__), "../config/config.yml")
     with open(config_path, 'r') as f:
         config = yaml.safe_load(f)
-
+    
     app.config['SQLALCHEMY_DATABASE_URI'] = config['database']['uri']
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.config['JWT_SECRET_KEY'] = config.get('jwt_secret_key', 'nklnknl')
-
+    
+    # ===== CRITICAL: ALL CSRF SETTINGS =====
     app.config['JWT_COOKIE_CSRF_PROTECT'] = False
     app.config['WTF_CSRF_ENABLED'] = False
     app.config['JWT_CSRF_CHECK_FORM'] = False
     app.config['JWT_CSRF_IN_COOKIES'] = False
+    # =======================================
     
     db.init_app(app)
     jwt.init_app(app)  # JWTManager MUST be initialized AFTER config is set
     register_routes(app)
     
+    # Initialize Swagger with template
+    swagger = Swagger(app, template=SWAGGER_TEMPLATE)
+    
+    # Debug: Print config to verify
     print("=" * 50)
     print("JWT CSRF Settings:")
     print(f"JWT_COOKIE_CSRF_PROTECT: {app.config.get('JWT_COOKIE_CSRF_PROTECT')}")
