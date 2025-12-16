@@ -30,7 +30,8 @@ SWAGGER_CONFIG = {
         }
     ],
     "swagger_ui_parameters": {
-        "requestInterceptor": "window.swaggerRequestInterceptor"
+        "requestInterceptor": "window.swaggerRequestInterceptor",
+        "responseInterceptor": "window.swaggerResponseInterceptor" 
     },
     "swagger_ui_js": [
         "/static/swagger_auth.js"
