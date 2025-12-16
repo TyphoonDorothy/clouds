@@ -45,6 +45,46 @@ def create_user_in_db(username: str, password: str):
 
 @auth_bp.route("/register", methods=["POST"])
 def register():
+    """
+    User Registration - creates a new user and returns access and refresh tokens
+    ---
+    tags:
+      - auth
+    consumes:
+      - application/json
+    parameters:
+      - in: body
+        name: body
+        required: true
+        schema:
+          type: object
+          properties:
+            username:
+              type: string
+              example: newuser
+            password:
+              type: string
+              example: securepassword123
+          required:
+            - username
+            - password
+    responses:
+      201:
+        description: User created and tokens returned
+        schema:
+          type: object
+          properties:
+            id:
+              type: integer
+            username:
+              type: string
+            access_token:
+              type: string
+            refresh_token:
+              type: string
+      400:
+        description: Invalid request data or username already exists
+    """
     data = request.json or {}
     username = (data.get("username") or "").strip()
     password = data.get("password") or ""
