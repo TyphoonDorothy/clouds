@@ -38,10 +38,11 @@ SWAGGER_CONFIG = {
     ],
 }
 
-jwt = JWTManager()  # create instance globally so other modules can import
-
 def create_app():
     app = Flask(__name__)
+
+    jwt = JWTManager
+
 
     config_path = os.path.join(os.path.dirname(__file__), "../config/config.yml")
     with open(config_path, 'r') as f:
@@ -51,7 +52,7 @@ def create_app():
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.config['JWT_SECRET_KEY'] = config.get('jwt_secret_key', 'nklnknl') 
     app.config["JWT_CSRF_ENABLED"] = False
-    print(f"[DEBUG] JWT_CSRF_ENABLED is set to: {app.config.get('JWT_CSRF_ENABLED')}", flush=True)e
+    print(f"[DEBUG] JWT_CSRF_ENABLED is set to: {app.config.get('JWT_CSRF_ENABLED')}", flush=True)
     db.init_app(app)
     jwt.init_app(app)  # initialize JWTManager
     register_routes(app)
