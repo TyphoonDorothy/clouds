@@ -34,7 +34,7 @@ SWAGGER_CONFIG = {
         "responseInterceptor": "window.swaggerResponseInterceptor" 
     },
     "swagger_ui_js": [
-        "/static/swagger_auth.js"
+        "../static/swagger_auth.js"
     ],
 }
 
@@ -51,8 +51,6 @@ def create_app():
     app.config['SQLALCHEMY_DATABASE_URI'] = config['database']['uri']
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.config['JWT_SECRET_KEY'] = config.get('jwt_secret_key', 'nklnknl') 
-    app.config["JWT_CSRF_ENABLED"] = False
-    print(f"[DEBUG] JWT_CSRF_ENABLED is set to: {app.config.get('JWT_CSRF_ENABLED')}", flush=True)
     db.init_app(app)
     jwt.init_app(app)  # initialize JWTManager
     register_routes(app)
