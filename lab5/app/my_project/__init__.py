@@ -41,7 +41,7 @@ SWAGGER_CONFIG = {
 def create_app():
     app = Flask(__name__)
 
-    jwt = JWTManager
+    jwt = JWTManager()
 
 
     config_path = os.path.join(os.path.dirname(__file__), "../config/config.yml")
