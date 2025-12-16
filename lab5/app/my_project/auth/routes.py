@@ -218,6 +218,7 @@ def protected():
       401:
         description: missing token
     """
+    print(f"[DEBUG] Token successfully decoded, identity is: {get_jwt_identity()}", flush=True)
     user_id = get_jwt_identity()
     current_app.logger.info(f"[JWT] Protected route accessed by user id={user_id}")
     user = db.session.get(User, user_id)
