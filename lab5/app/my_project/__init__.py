@@ -51,6 +51,7 @@ def create_app():
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.config['JWT_SECRET_KEY'] = config.get('jwt_secret_key', 'nklnknl') 
     app.config["JWT_CSRF_ENABLED"] = False
+    print(f"[DEBUG] JWT_CSRF_ENABLED is set to: {app.config.get('JWT_CSRF_ENABLED')}", flush=True)e
     db.init_app(app)
     jwt.init_app(app)  # initialize JWTManager
     register_routes(app)
