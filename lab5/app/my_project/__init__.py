@@ -126,11 +126,15 @@ def create_app():
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.config['JWT_SECRET_KEY'] = config.get('jwt_secret_key', 'nklnknl')
     
-    # CRITICAL: Disable CSRF in JWT
+    # ===== CRITICAL: ALL CSRF SETTINGS =====
     app.config['JWT_COOKIE_CSRF_PROTECT'] = False
+    app.config['WTF_CSRF_ENABLED'] = False
+    app.config['JWT_CSRF_CHECK_FORM'] = False
+    app.config['JWT_CSRF_IN_COOKIES'] = False
+    # =======================================
     
     db.init_app(app)
-    jwt.init_app(app)
+    jwt.init_app(app)  # JWTManager MUST be initialized AFTER config is set
     register_routes(app)
     
     # Initialize Swagger with template
@@ -140,5 +144,14 @@ def create_app():
     @app.route('/apidocs/')
     def custom_swagger_ui():
         return render_template_string(CUSTOM_SWAGGER_HTML)
+    
+    # Debug: Print config to verify
+    print("=" * 50)
+    print("JWT CSRF Settings:")
+    print(f"JWT_COOKIE_CSRF_PROTECT: {app.config.get('JWT_COOKIE_CSRF_PROTECT')}")
+    print(f"WTF_CSRF_ENABLED: {app.config.get('WTF_CSRF_ENABLED')}")
+    print(f"JWT_CSRF_CHECK_FORM: {app.config.get('JWT_CSRF_CHECK_FORM')}")
+    print(f"JWT_CSRF_IN_COOKIES: {app.config.get('JWT_CSRF_IN_COOKIES')}")
+    print("=" * 50)
     
     return app
