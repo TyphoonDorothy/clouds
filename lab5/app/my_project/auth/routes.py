@@ -185,29 +185,6 @@ def login():
     return jsonify(access_token=access, refresh_token=refresh), 200
 
 
-@auth_bp.route("/logout", methods=["POST"])
-@jwt_required()
-def logout():
-    """
-    Logout (example) — demonstrates blacklisting hook point
-    ---
-    tags:
-      - auth
-    security:
-      - BearerAuth: []
-    responses:
-      200:
-        description: logged out
-    """
-    user_id = get_jwt_identity()  # This will now be a string like "9"
-    jwt_data = get_jwt()
-    jti = jwt_data.get("jti")
-    # Here you would add jti to your revocation store (redis) if using immediate revocation.
-    current_app.logger.info(f"[JWT] Logout requested by user id={user_id}, jti={jti}")
-    print(f"[JWT] logout_jti={jti}", flush=True)
-    return jsonify({"msg": "logged out"}), 200
-
-
 @auth_bp.route("/protected", methods=["GET"])
 @jwt_required()
 def protected():
@@ -231,8 +208,8 @@ def protected():
       401:
         description: missing token
     """
-    user_id_str = get_jwt_identity()  # This is a string like "9"
-    user_id = int(user_id_str)  # Convert back to int for database lookup
+    user_id_str = get_jwt_identity() 
+    user_id = int(user_id_str) 
     
     current_app.logger.info(f"[JWT] Protected route accessed by user id={user_id}")
     user = db.session.get(User, user_id)
