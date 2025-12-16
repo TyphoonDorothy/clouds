@@ -1,0 +1,9 @@
+{
+  "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+    "FUNCTIONS_WORKER_RUNTIME": "python",
+    "ServiceBusConnection": "Endpoint=sb://clouds-service-bus.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=bO+xvv/Y3hELOiLg/WXqEFnZBCDKjTdLd+ASbAvazeE=",
+    "SqlConnectionString": "Driver={ODBC Driver 18 for SQL Server};Server=tcp:server-clouds.database.windows.net,1433;Database=db-sports-managment;UID=typhoon;PWD=ThisIsPassword!;Encrypt=yes;TrustServerCertificate=yes;"
+  }
+}
