@@ -103,9 +103,9 @@ def register():
         current_app.logger.exception("[AUTH] Unexpected error creating user")
         return jsonify({"msg": "internal error"}), 500
 
-    # Generate JWT tokens immediately
-    access = create_access_token(identity=user.id)
-    refresh = create_refresh_token(identity=user.id)
+    # CRITICAL FIX: Convert user.id to string
+    access = create_access_token(identity=str(user.id))
+    refresh = create_refresh_token(identity=str(user.id))
 
     print(f"[JWT] Created access token for new user id={user.id} username={user.username}", flush=True)
     print(f"[JWT] Created refresh token for new user id={user.id} username={user.username}", flush=True)
@@ -172,8 +172,9 @@ def login():
         current_app.logger.info(f"[JWT] Login failed: bad password for user: {username} (id={user.id})")
         return jsonify({"msg": "Invalid credentials"}), 401
 
-    access = create_access_token(identity=user.id)
-    refresh = create_refresh_token(identity=user.id)
+    # CRITICAL FIX: Convert user.id to string
+    access = create_access_token(identity=str(user.id))
+    refresh = create_refresh_token(identity=str(user.id))
 
     # log (use debug for token string) and forced prints for immediate visibility
     current_app.logger.info(f"[JWT] Created tokens for user id={user.id} username={user.username}")
@@ -182,8 +183,6 @@ def login():
     print(f"[JWT] refresh={refresh}", flush=True)
 
     return jsonify(access_token=access, refresh_token=refresh), 200
-
-
 
 
 @auth_bp.route("/logout", methods=["POST"])
@@ -200,7 +199,7 @@ def logout():
       200:
         description: logged out
     """
-    user_id = get_jwt_identity()
+    user_id = get_jwt_identity()  # This will now be a string like "9"
     jwt_data = get_jwt()
     jti = jwt_data.get("jti")
     # Here you would add jti to your revocation store (redis) if using immediate revocation.
@@ -232,7 +231,9 @@ def protected():
       401:
         description: missing token
     """
-    user_id = get_jwt_identity()
+    user_id_str = get_jwt_identity()  # This is a string like "9"
+    user_id = int(user_id_str)  # Convert back to int for database lookup
+    
     current_app.logger.info(f"[JWT] Protected route accessed by user id={user_id}")
     user = db.session.get(User, user_id)
     username = user.username if user else None
