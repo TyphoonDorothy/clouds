@@ -34,7 +34,7 @@ SWAGGER_CONFIG = {
         "responseInterceptor": "window.swaggerResponseInterceptor" 
     },
     "swagger_ui_js": [
-        "../static/swagger_auth.js"
+        "https://gist.github.com/f389661a55ed658c25dd71899b27a44b.git"
     ],
 }
 
